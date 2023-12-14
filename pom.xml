@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zmz</groupId>
+    <artifactId>chatgpt-sdk</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <slf4j.version>2.0.6</slf4j.version>
+        <retrofit2.version>2.9.0</retrofit2.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.12</version>
+        </dependency>
+        <!--   okhttp-sse:
+
+        作用：提供对 Server-Sent Events（SSE）的支持，这是一种基于HTTP的轻量级持久连接机制，用于从服务器推送数据到客户端。
+        使用场景：如果您需要从服务器获取实时数据，例如事件流或持续更新的信息，可以使用该库来处理 Server-Sent Events。
+        logging-interceptor:
+
+        作用：OkHttp的拦截器，用于记录HTTP请求和响应的日志信息。
+        使用场景：在开发和调试阶段，您可以使用此拦截器来记录网络请求和响应的详细信息，帮助排查问题或进行性能分析。
+        retrofit:
+
+        作用：Retrofit是一个类型安全的HTTP客户端库，用于轻松地与REST API进行交互。
+        使用场景：它允许您定义REST API的接口，并使用注解来描述请求。通过Retrofit，您可以方便地进行HTTP请求并将响应转换为Java对象。
+        converter-jackson:
+
+        作用：Retrofit的一个转换器，用于将JSON数据转换为Java对象（反序列化）以及将Java对象转换为JSON（序列化）。
+        使用场景：当您的REST API使用JSON作为数据格式时，使用这个转换器可以让Retrofit自动地将JSON响应转换为Java对象，并将Java对象转换为JSON用于请求。
+        adapter-rxjava2:
+
+        作用：Retrofit的一个适配器，允许与 RxJava2 结合使用。
+        使用场景：RxJava是一个响应式编程库，与Retrofit一起使用可以使您更方便地处理异步操作、数据流和事件。该适配器允许Retrofit与RxJava2集成，让您更好地管理异步操作。     -->
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp-sse</artifactId>
+            <version>3.14.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>3.14.9</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>retrofit</artifactId>
+            <version>${retrofit2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-jackson</artifactId>
+            <version>${retrofit2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>adapter-rxjava2</artifactId>
+            <version>${retrofit2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>2.0.28</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+        <finalName>chatgpt-sdk</finalName>
+        <plugins>
+            <!--   构建时插件用于执行项目的单元测试。      -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <!--   Compiler插件允许配置项目的Java编译器版本。      -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <!--   Jar插件允许配置如何生成JAR文件。      -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.1</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
